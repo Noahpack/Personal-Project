@@ -33,6 +33,6 @@ massive({
 //Auth endpoints
 app.post('/auth/register', auth.register)
 app.post('/auth/login', auth.login)
-app.post('/auth/logout', auth.logout)
+app.post('/auth/logout')
 
 app.listen(SERVER_PORT, ()=>console.log(`Active on port ${SERVER_PORT}`))
