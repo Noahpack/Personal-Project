@@ -5,13 +5,15 @@ module.exports = {
     register: async (req, res) => {
         const db = req.app.get('db')
         const {username, password} = req.body
+
         const foundUser = await db.check_user(username)
         if(foundUser[0]){
             return res.status(400).send('Username already in use')
         }
-        const salt = bcrpyt.genSaltSync(10)
+
+        const salt = bcrypt.genSaltSync(10);
         const hashed = bcrypt.hashSync(password, salt)
-        const [newUser] = await db.add_user([username, hashed])
+        const [newUser] = await db.register_user([username, hashed])
         req.session.userid = {
             userid: newUser.id
         }

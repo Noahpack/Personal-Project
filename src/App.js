@@ -7,7 +7,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.props.location.pathname != '/' ? <Nav/> : <div></div>}
+        {this.props.location.pathname !== '/' ? <Nav/> : <div></div>}
+        {routes}
       </div>
     )
   }

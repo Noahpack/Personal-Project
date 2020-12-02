@@ -6,6 +6,7 @@ const session = require('express-session')
 
 const {SESSION_SECRET, SERVER_PORT, CONNECTION_STRING} = process.env
 const auth = require('./authController')
+const post = require('./postController')
 
 const app = express();
 
@@ -33,6 +34,8 @@ massive({
 //Auth endpoints
 app.post('/auth/register', auth.register)
 app.post('/auth/login', auth.login)
-app.post('/auth/logout')
+app.post('/auth/logout', auth.logout)
+app.post('/newPost', post.addPost)
+app.get('/feed/posts/:id', post.getPosts)
 
 app.listen(SERVER_PORT, ()=>console.log(`Active on port ${SERVER_PORT}`))

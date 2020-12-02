@@ -1,0 +1,26 @@
+body{
+    
+    display: flex;
+    flex-direction: row;
+}
+.navBar {
+    background-color: wheat;
+    height: 100%;
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+  
+    flex-direction: column;
+    justify-content: space-evenly;
+
+}
+.topNavBar{
+    background-color: wheat;
+    height: 90vh;
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    
+    flex-direction: column;
+    justify-content: space-evenly;
+}

@@ -7,7 +7,7 @@ import UserPosts from './components/userPosts/UserPosts'
 export default (
     <Switch>
         <Route exact path="/" component={Auth}/>
-        <Route path ="/Feed" component={Feed}/>
-        <Route path ="MyPosts" component={UserPosts}/>
+        <Route path ="/feed" component={Feed}/>
+        <Route path ="myPosts" component={UserPosts}/>
     </Switch>
 )
