@@ -36,6 +36,10 @@ app.post('/auth/register', auth.register)
 app.post('/auth/login', auth.login)
 app.post('/auth/logout', auth.logout)
 app.post('/newPost', post.addPost)
+app.get('/post/:id', post.getPost)
 app.get('/feed/posts/:id', post.getPosts)
+app.get('/auth/me', auth.getMe)
+app.delete('/post/delete/:id', post.deletePost)
+
 
 app.listen(SERVER_PORT, ()=>console.log(`Active on port ${SERVER_PORT}`))

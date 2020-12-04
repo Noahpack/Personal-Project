@@ -10,7 +10,7 @@ class Nav extends Component {
     getMe  = async () => {
         try{
             const me = await axios.get('/api/auth/me')
-            this.props.updateUserData(me.data[0].username, me.data[0])     
+            this.props.updateUserData(me.data[0].username)     
         }catch(err){
             alert(err)
         }
@@ -35,10 +35,12 @@ class Nav extends Component {
                     <div className='profile'>
                         <h4> Username: {this.props.username}</h4>
                     </div>
+                    
                     <button><Link className='navButton' to='/feed'>Home</Link></button>
                     <button><Link className='navButton' to='/new'>New Post</Link></button>
-                </div>
+                  
                 <button><Link className='navButton' to='/'>Logout</Link></button>
+                </div>
             </div>
         )
     }

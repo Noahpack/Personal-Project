@@ -2,11 +2,15 @@
 body {
     width: 100vw;
     height: 100%;
-    background-color: thistle;
+    background-color: rgb(56, 54, 56);
 }
 
 .feed {
-    background-color: teal;
+    background-color: rgb(64, 70, 70);
     width: 80vw;
     height: 100%;
+}
+.dash {
+    display: flex;
+    justify-content: row;
 }

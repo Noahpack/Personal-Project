@@ -21,14 +21,14 @@ handleSearchInput = (e) => {
 }   
 
 handleSearch = () => {
-    this.setState({
-        searchInput: ""
-    })
     this.getPosts()
 }
 
 handleReset = () => {
-    this.getPosts()
+   this.setState({
+       searchInput: ""
+   })
+   this.getPosts()
 }
 
 toggleMyPosts = () => {
@@ -37,7 +37,7 @@ toggleMyPosts = () => {
     })
 }
     
-componentDidUpdate(prevState){
+componentDidUpdate(prevProps, prevState){
     if(prevState.myPosts !== this.state.myPosts){
         this.getPosts()
     }  
@@ -49,13 +49,13 @@ componentDidMount(){
 
 getPosts = async () => {
     try{
-        const posts = await axios.get(`/feed/posts/${this.props.id}?search=${this.state.searchInput}&userposts=${this.state.myPosts}`)
+        const posts = await axios.get(`/feed/posts?search=${this.state.searchInput}&userposts=${this.state.myPosts}`)
         this.setState({
             posts: posts.data
         })
     }
     catch(err){
-        alert(err)
+       console.log(err)
     }
 }
     
@@ -74,12 +74,16 @@ getPosts = async () => {
             )
         })
         return (
-            <div className='dash'>
+            <div className='feed'>
                 <div className='search'>
                     <div className='searchBar'>
                         <input onChange={this.handleSearchInput} type='text' placeholder='Search Title: ' value={this.state.searchInput}/>
                         <button onClick={this.handleSearch}>Search</button>
                         <button onClick={this.handleReset}>Reset</button>
+                    </div>
+                    <div className='checkbox'>
+                        <h5>My Post</h5>
+                        <input type='checkbox' checked={this.state.myPosts} onChange={this.toggleMyPosts}/>
                     </div>
                 </div>
                 <div className='postContainer'>
