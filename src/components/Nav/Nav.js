@@ -9,7 +9,7 @@ class Nav extends Component {
  
     getMe  = async () => {
         try{
-            const me = await axios.get('/api/auth/me')
+            const me = await axios.get('/auth/me')
             this.props.updateUserData(me.data[0].username)     
         }catch(err){
             alert(err)
@@ -30,18 +30,20 @@ class Nav extends Component {
     }
     render(){
         return (
-            <div className='navBar'>
+            <header className='navBar'>
                 <div className='topNavBar'>
                     <div className='profile'>
-                        <h4> Username: {this.props.username}</h4>
+                        <h4> Welcome, {this.props.username}</h4>
                     </div>
                     
-                    <button><Link className='navButton' to='/feed'>Home</Link></button>
-                    <button><Link className='navButton' to='/new'>New Post</Link></button>
+                    <button><Link className='navBtn' to='/feed'>Home</Link></button>
+                    <button><Link className='navBtn' to='/new'>New Post</Link></button>
                   
-                <button><Link className='navButton' to='/'>Logout</Link></button>
+                <button><Link className='navBtn' to='/'>Logout</Link></button>
                 </div>
-            </div>
+                <br className='br'></br>
+            </header>
+            
         )
     }
 

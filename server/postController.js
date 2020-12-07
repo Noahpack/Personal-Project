@@ -7,8 +7,13 @@ module.exports = {
         const {title, poster, rating, content} = req.body
         const id = userid
 
-        const newPost = await db.add_post([title, poster, rating, content, id])
-        return res.status(200).send(newPost)
+        try {
+            const newPost = await db.add_post([title, poster, rating, content, id])
+            return res.status(200).send(newPost)
+        }catch(err){
+            console.log('cannot add review', err)
+            res.sendStatus(500)
+        }
     },
     getPosts: async (req, res) => {
         const db = req.app.get('db')
@@ -58,8 +63,9 @@ module.exports = {
         }
     },
     getAllPosts: async (req, res) => {
-        const allPosts = await req.app.get('db').get_all_posts()
-        return res.status(200).send(allPosts)
+        const db = req.app.get('db')
+        const posts = await db.get_all_posts()
+        res.status(200).send(posts)
     }
 
 }

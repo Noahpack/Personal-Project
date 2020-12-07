@@ -21,14 +21,14 @@ handleSearchInput = (e) => {
 }   
 
 handleSearch = () => {
-    this.getPosts()
+    this.getAllPosts()
 }
 
 handleReset = () => {
    this.setState({
        searchInput: ""
    })
-   this.getPosts()
+   this.getAllPosts()
 }
 
 toggleMyPosts = () => {
@@ -39,23 +39,34 @@ toggleMyPosts = () => {
     
 componentDidUpdate(prevProps, prevState){
     if(prevState.myPosts !== this.state.myPosts){
-        this.getPosts()
+        this.getAllPosts()
     }  
 }
 
 componentDidMount(){
-    this.getPosts()
+    this.getAllPosts()
+    this.deletePost()
 }
 
-getPosts = async () => {
-    try{
-        const posts = await axios.get(`/feed/posts?search=${this.state.searchInput}&userposts=${this.state.myPosts}`)
+getAllPosts = async () => {
+    try {
+        const posts = await axios.get(`/feed/posts`)
         this.setState({
             posts: posts.data
         })
+    }catch(err){
+        console.log(err)
     }
-    catch(err){
-       console.log(err)
+}
+
+deletePost = async (id) => {
+    try {
+        const posts = await axios.get(`/post/delete/${id}`)
+        this.setState({
+            posts: posts.data
+        })
+    }catch(err){
+        console.log(err)
     }
 }
     
@@ -63,17 +74,23 @@ getPosts = async () => {
         const mappedPosts = this.state.posts.map((post, index) => {
             return (
                 <div key={index}>
-                    <Link className='posts' to={`/post/${post.id}`}>
+                   <div className='posts' to={`/post/${post.id}`}>
+                   <h5>Posted By: ${this.props.username}</h5>
+                    <button onClick={this.deletePost}>Delete Post</button>
                         <h1>{post.title}</h1>
                         <div className='rightSide'>
-                            <h5>{post.username}</h5>
-                            <img alt='profile' src={post.picture}/>
+                            
+                            <img alt='img' style={{width:"200px"}} src={post.poster}/>
+                            <h5>{post.rating}</h5>
+                            <h5>{post.content}</h5>
+                            <hr className='hr'></hr>
                         </div>
-                    </Link>
+                        </div> 
                 </div>
             )
         })
         return (
+            <div className='over'>
             <div className='feed'>
                 <div className='search'>
                     <div className='searchBar'>
@@ -89,6 +106,7 @@ getPosts = async () => {
                 <div className='postContainer'>
                     {mappedPosts}
                 </div>
+            </div>
             </div>
         )
     }

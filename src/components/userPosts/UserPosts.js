@@ -22,7 +22,7 @@ class UserPost extends Component{
 
     getPost = async () => {
        try{ 
-        const post = await axios.get(`/post/${this.props.match.params.postid}`)
+        const post = await axios.get(`/post/${this.props.match.params.id}`)
         this.setState({
             title: post.data[0].title,
             poster: post.data[0].poster,

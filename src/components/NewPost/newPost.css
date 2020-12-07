@@ -1,0 +1,16 @@
+.NewPost {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+}
+.newPost {
+    background-color: rgb(221, 66, 66);
+    margin-top: 80px;
+    border-style: solid;
+    border-color: rgb(151, 150, 150);
+    border-width: 7px;
+}

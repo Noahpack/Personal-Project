@@ -1,48 +1,51 @@
 
-/* .navBar {
-    background-color: wheat;
-    height: 100%;
-    width: 20%;
+.navBar {
     display: flex;
-    justify-content: center;
-  
     flex-direction: row;
-    justify-content: space-evenly;
+    background-image: linear-gradient(rgb(64, 70, 70),rgb(221, 66, 66));
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    width: fit-content;
+    height: 12vh;
+    width: 100%;
+    position: fixed;
+    border-style: solid;
+    border-width: 7px;
+    border-color:rgb(151, 150, 150);
 
+}
+/* .navBar button{
+    background-color: #403D39;
+    width: 75px;
+    height: 30px;
+    border: none;
 } */
 .topNavBar{
-    background-color: rgb(221, 66, 66);
-    height: 100vh;
-    width: 20vw;
     display: flex;
-    justify-content: center;
-    
-    flex-direction: column;
-    justify-content: space-evenly;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
 }
 .dash {
     width: 75%;
     display: flex;
     flex-direction: row;
 }
-.navButton {
+.navBtn {
     color: black;
-    background-color: transparent; 
+    background-color: transparent;
     border: none;
-   
-    padding: 15px 32px;
+    
+   width: fit-content;
+   height: fit-content;
+    
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
 }
-.buttons{
-    margin-top: 10px;
-    width: 40%;
-    height: 15%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    font-size: larger;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+.br {
+    width: 10px;
+    background-color: black;
 }

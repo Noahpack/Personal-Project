@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import axios from 'axios'
-
+import './newPost.css'
 
 class NewPost extends Component{
     constructor(){
@@ -43,9 +43,9 @@ class NewPost extends Component{
                 <div className='newPostContent'>
                     <h5>Title:</h5>
                     <input name='title' onChange={this.handleChange}></input>
-                    <img alt = 'post' src={this.state.poster}/>
                     <h5>Image URL: </h5>
                     <input name ='poster' onChange={this.handleChange}></input>
+                    <img alt = 'post' src={this.state.poster}/>
                     <h5>Rating: </h5>
                     <input name = 'rating' onChange={this.handleChange}></input>
                     <h5>Content: </h5>
