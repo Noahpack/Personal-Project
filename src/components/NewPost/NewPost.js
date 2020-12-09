@@ -45,7 +45,7 @@ class NewPost extends Component{
                     <input name='title' onChange={this.handleChange}></input>
                     <h5>Image URL: </h5>
                     <input name ='poster' onChange={this.handleChange}></input>
-                    <img alt = 'post' src={this.state.poster}/>
+                    <img alt = 'post' style={{width:'200px'}}src={this.state.poster}/>
                     <h5>Rating: </h5>
                     <input name = 'rating' onChange={this.handleChange}></input>
                     <h5>Content: </h5>

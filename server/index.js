@@ -37,11 +37,13 @@ app.post('/auth/login', auth.login)
 app.post('/auth/logout', auth.logout)
 //Post endpoints
 app.post('/newPost', post.addPost)
-app.get('/post/:id', post.getPost)
+app.get('/post/:user_id', post.getPost)
 app.get(`/feed/posts`, post.getAllPosts)
 app.get('/feed/posts/:id', post.getPosts)
 app.get('/auth/me', auth.getMe)
 app.delete('/post/delete/:id', post.deletePost)
+app.get(`/posts/:user_id`, post.getYourPosts)
+
 
 
 app.listen(SERVER_PORT, ()=>console.log(`Active on port ${SERVER_PORT}`))

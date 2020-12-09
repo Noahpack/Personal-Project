@@ -17,7 +17,7 @@ class Nav extends Component {
     }
     componentDidMount() {
         this.getMe()
-        console.log(this.props.username)
+        
     }
 
     logout = async () => {
@@ -38,7 +38,7 @@ class Nav extends Component {
                     
                     <button><Link className='navBtn' to='/feed'>Home</Link></button>
                     <button><Link className='navBtn' to='/new'>New Post</Link></button>
-                  
+                    <button><Link className='navBtn' to={`/myPosts/${this.props.user.id}`}>My Posts</Link>  </button>
                 <button><Link className='navBtn' to='/'>Logout</Link></button>
                 </div>
                 <br className='br'></br>
@@ -49,8 +49,6 @@ class Nav extends Component {
 
 }
 function mapStateToProps(state){
-    return{
-        username: state.username
-    }
+    return state
 }
 export default connect(mapStateToProps, {updateUserData})(Nav)

@@ -41,7 +41,7 @@ class Auth extends Component{
         const {username, password} = this.state
         try{
             const user = await axios.post('/auth/login', {username, password})
-            this.props.getUserData(user.data.id, user.data.username)
+            this.props.getUserData(user.data)
             this.props.history.push('/feed')
         }catch(err){
             alert(err.response.request.response)

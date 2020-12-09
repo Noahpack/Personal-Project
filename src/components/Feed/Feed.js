@@ -74,10 +74,11 @@ deletePost = async (id) => {
         const mappedPosts = this.state.posts.map((post, index) => {
             return (
                 <div key={index}>
-                   <div className='posts' to={`/post/${post.id}`}>
-                   <h5>Posted By: ${this.props.username}</h5>
-                    <button onClick={this.deletePost}>Delete Post</button>
+                    
+                   {/* <Link className='posts' to={`/post/${post.id}`}> */}
+                        <h5>Posted By: {post.username}</h5>
                         <h1>{post.title}</h1>
+                        
                         <div className='rightSide'>
                             
                             <img alt='img' style={{width:"200px"}} src={post.poster}/>
@@ -85,7 +86,7 @@ deletePost = async (id) => {
                             <h5>{post.content}</h5>
                             <hr className='hr'></hr>
                         </div>
-                        </div> 
+                    {/* </Link>  */}
                 </div>
             )
         })

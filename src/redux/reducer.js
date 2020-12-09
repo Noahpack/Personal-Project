@@ -1,5 +1,5 @@
 const initialState = {
-    username: '',
+    user: {},
     poster: '',
     title: '',
     rating: null,
@@ -15,17 +15,17 @@ const CLEAR_USER_DATA = 'CLEAR_USER_DATA'
 //Action Builders
 
 
-export const updateUserData = (username) => {
+export const updateUserData = (user) => {
     return {
         type: UPDATE_USER_DATA,
-        payload: {username}
+        payload: {user}
     }
 }
 
-export const getUserData = (id, username) => {
+export const getUserData = (user) => {
     return{
         type: GET_USER_DATA,
-        payload: {id, username}
+        payload: {user}
     }
 }
 
@@ -33,7 +33,7 @@ export const clearUserData = () => {
     return {
         type: CLEAR_USER_DATA,
         payload: {
-            username: ''
+            user: {}
         }
     }
 }
@@ -43,12 +43,12 @@ export default function(state = initialState, action){
         case GET_USER_DATA: 
             return {
                 id: action.payload.id,
-                username: action.payload.username,
+                user: action.payload.user,
                 
             }
         case UPDATE_USER_DATA:
             return{
-                username: action.payload.username,
+                user: action.payload.user,
                 
             }
         default:

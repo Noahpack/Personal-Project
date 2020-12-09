@@ -66,6 +66,15 @@ module.exports = {
         const db = req.app.get('db')
         const posts = await db.get_all_posts()
         res.status(200).send(posts)
+    },
+    getYourPosts: async (req, res) => {
+        const db = req.app.get('db')
+        const {user_id} = req.params
+
+        const post = await db.get_your_posts([user_id])
+        console.log(post)
+        return res.status(200).send(post)
+        
     }
 
 }
