@@ -8,6 +8,7 @@ class UserPosts extends Component{
         super()
 
         this.state={
+            
             // title: "",
             // poster: "",
             // rating: "",
@@ -17,31 +18,23 @@ class UserPosts extends Component{
             posts: []
         }
     }
+    
+    // handleChange = (e) => {
+    //     this.setState({
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
+
+    
 
     componentDidMount(){
         this.getYourPosts()
     }
 
-    // getPost = async () => {
-    //    try{ 
-    //     const post = await axios.get(`/post/${this.props.match.params.id}`)
-    //     this.setState({
-    //         title: post.data[0].title,
-    //         poster: post.data[0].poster,
-    //         rating: post.data[0].rating,
-    //         content: post.data[0].content,
-    //         username: post.data[0].username,
-    //         userId: post.data[0].id
-
-    //     })
-    //  }
-    //     catch(err){
-    //         alert(err)
-    //     }
-    // }
+    
     getYourPosts = async () => {
         try {
-            const post = await axios.get(`/posts/${this.props.match.params.user_id}`)
+            const post = await axios.get(`/posts/${this.props.user.id}`)
             this.setState({
 
                 posts: post.data
@@ -50,53 +43,58 @@ class UserPosts extends Component{
             alert(err)
         }
     }
-
-    deletePost = async (id) => {
-        try{
-            const response = axios.delete(`/post/delete/${id}`)
-            if (response === "You can only delete posts you created."){
-                alert(response)
-            }
-            this.props.history.push('/feed')
-        }
-        catch(err){
-            alert(err)
-        }
+    // editPost = async (postId, rating) => {
+    //     axios.put(`/post/${postId}`, {rating})
+    //     .then(() => {
+    //         this.getYourPosts()
+    //     })
+    //     .catch(err => {
+    //         console.log('edit post errrrr', err)
+    //     })
+         
+    // }
+    deletePost = (id) => {
+        axios.delete(`/post/${id}`)
+        .then(() => {
+            this.getYourPosts()
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
+
+    
 
     render(){
         const mappedPosts = this.state.posts.map((post) => {
             return <div key={post.id}>
                     
-                {console.log(post)}
+                
                  <h5>Posted By: {post.username}</h5>
                  <h1>{post.title}</h1>
                  
                  <div className='rightSide'>
                      
-                     <img alt='img' style={{width:"200px"}} src={post.poster}/>
-                     <h5>{post.rating}</h5>
-                     <h5>{post.content}</h5>
-                     <hr className='hr'></hr>
+                     <img alt='img' style={{width:"150px"}} src={post.poster}/>
+                        <h3>{post.rating}</h3>
+                     <h5 className='para'>{post.content}</h5>
+                    {/* <input className='edit-inp' name='content' onChange={this.handleChange} placeholder='edit rating'/>
+                     <button className='edit-btn' onClick={()=> this.editPost(post.id, this.state.rating)}>Edit Rating</button> */}
                      <button onClick={()=>this.deletePost(post.id)}>Delete</button>
+                     <hr className='hr'></hr>
                  </div>
+                
+                 
              
          </div> 
         })
-        console.log("User post line 86",this.state.posts)//
+        
         return (
             <div className="Post">
                 <div className="content">
-                    <div className="postTitle">
-                        <h1>{this.state.title}</h1>
-                        <div className = "postTitle">
-                            <h5>Posted By: {this.state.username}</h5>
-                            
-                        </div>
-
-                    </div>
+                    
                     <div className="postContent">
-                        <img alt="Poster" style={{width:"150px"}} src={this.state.poster}/>
+                        
                         
                     </div>
                    {mappedPosts}

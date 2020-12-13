@@ -40,12 +40,18 @@ toggleMyPosts = () => {
 componentDidUpdate(prevProps, prevState){
     if(prevState.myPosts !== this.state.myPosts){
         this.getAllPosts()
-    }  
+    } 
+    
 }
 
 componentDidMount(){
     this.getAllPosts()
-    this.deletePost()
+   
+}
+handleChange = (e) => {
+    this.setState({
+        [e.target.name]: e.target.value
+    })
 }
 
 getAllPosts = async () => {
@@ -58,17 +64,18 @@ getAllPosts = async () => {
         console.log(err)
     }
 }
-
-deletePost = async (id) => {
-    try {
-        const posts = await axios.get(`/post/delete/${id}`)
-        this.setState({
-            posts: posts.data
-        })
-    }catch(err){
-        console.log(err)
-    }
+editPost = async (postId, rating) => {
+    axios.put(`/post/${postId}`, {rating})
+    .then(() => {
+        this.getYourPosts()
+    })
+    .catch(err => {
+        console.log('edit post errrrr', err)
+    })
+     
 }
+
+
     
     render(){
         const mappedPosts = this.state.posts.map((post, index) => {
@@ -82,8 +89,10 @@ deletePost = async (id) => {
                         <div className='rightSide'>
                             
                             <img alt='img' style={{width:"200px"}} src={post.poster}/>
-                            <h5>{post.rating}</h5>
+                            <h5>Your Rating: {post.rating}</h5>
                             <h5>{post.content}</h5>
+                            <input className='edit-inp' name='content' onChange={this.handleChange} placeholder='edit rating'/>
+                     <button className='edit-btn' onClick={()=> this.editPost(post.id, this.state.rating)}>Edit Rating</button>
                             <hr className='hr'></hr>
                         </div>
                     {/* </Link>  */}

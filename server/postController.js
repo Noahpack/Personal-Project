@@ -3,10 +3,10 @@
 module.exports = {
     addPost: async (req, res) => {
         const db = req.app.get('db')
-        const {userid} = req.session.userid;
+        const {userId} = req.session.user;
         const {title, poster, rating, content} = req.body
-        const id = userid
-
+        const id = userId
+        console.log(req.session.user)
         try {
             const newPost = await db.add_post([title, poster, rating, content, id])
             return res.status(200).send(newPost)
@@ -52,15 +52,8 @@ module.exports = {
     deletePost: async (req, res) => {
         const db = req.app.get('db')
         const {id} = req.params
-        const {userid} = req.session.id
-        const post = await db.get_post([id])
-
-        if(userid != post[0].id){
-            return res.status(401).send('You cannot delete another users post')
-        }else {
-            await db.delete_post([id])
-            return res.status(200).send('Deleted')
-        }
+        await db.delete_post([id])
+        res.sendStatus(200)
     },
     getAllPosts: async (req, res) => {
         const db = req.app.get('db')
@@ -75,6 +68,15 @@ module.exports = {
         console.log(post)
         return res.status(200).send(post)
         
+    },
+    editPost: async (req, res) => {
+       const db = req.app.get('db')
+       const {id} = req.params
+       const {rating} = req.body
+
+       await db.edit_post([id, rating])
+
+       res.sendStatus(200)
     }
 
 }

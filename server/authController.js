@@ -14,7 +14,7 @@ module.exports = {
         const salt = bcrypt.genSaltSync(10);
         const hashed = bcrypt.hashSync(password, salt)
         const [newUser] = await db.register_user([username, hashed])
-        req.session.userid = {
+        req.session.user = {
             userid: newUser.id
         }
         res.status(200).send({
@@ -36,11 +36,12 @@ module.exports = {
         const authenticated = bcrypt.compareSync(password, user.password)
         if (authenticated){
             req.session.user = {
-                id: user.id,
-                username: user.username,
-                profile_pic: user.profile_pic
+                userId: user.id
             }
-            return res.status(200).send(req.session.user)
+            return res.status(200).send({
+                id: user.id,
+                username: user.username
+            })
         }
         else {
             res.status(401).send("Incorrect login info")
@@ -51,12 +52,15 @@ module.exports = {
         res.sendStatus(200)
     },
     getMe: async (req, res) => {
-        const {userid} = req.session.userid
-
+        const {userId} = req.session.user
+        
         const db = req.app.get('db')
 
-        const me = await db.get_me([userid])
-        return res.status(200).send(me)
+        const [me] = await db.get_me([userId])
+        return res.status(200).send({
+            id: me.id,
+            username: me.username
+        })
     },
     
 }

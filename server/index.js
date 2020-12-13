@@ -35,13 +35,14 @@ massive({
 app.post('/auth/register', auth.register)
 app.post('/auth/login', auth.login)
 app.post('/auth/logout', auth.logout)
+app.get('/auth/me', auth.getMe)
 //Post endpoints
 app.post('/newPost', post.addPost)
 app.get('/post/:user_id', post.getPost)
 app.get(`/feed/posts`, post.getAllPosts)
 app.get('/feed/posts/:id', post.getPosts)
-app.get('/auth/me', auth.getMe)
-app.delete('/post/delete/:id', post.deletePost)
+app.put('/post/:id', post.editPost)
+app.delete('/post/:id', post.deletePost)
 app.get(`/posts/:user_id`, post.getYourPosts)
 
 

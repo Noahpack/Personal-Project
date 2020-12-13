@@ -27,8 +27,10 @@ class NewPost extends Component{
     }
     addPost = () => {
         try{
-            axios.post('/newPost', this.state)
-            this.props.history.push('/feed')
+            axios.post('/newPost', this.state).then(()=> {
+                this.props.history.push('/feed')
+            })
+           
         }
         catch(err){
             alert(err)
