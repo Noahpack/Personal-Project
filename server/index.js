@@ -10,6 +10,10 @@ const post = require('./postController')
 
 const app = express();
 
+const path = require('path')
+
+app.use(express.static(`${__dirname}/../build`))
+
 app.use(express.json())
 
 app.use(session({
@@ -45,6 +49,8 @@ app.put('/post/:id', post.editPost)
 app.delete('/post/:id', post.deletePost)
 app.get(`/posts/:user_id`, post.getYourPosts)
 
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'))
+  })
 
 app.listen(SERVER_PORT, ()=>console.log(`Active on port ${SERVER_PORT}`))
