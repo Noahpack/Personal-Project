@@ -36,11 +36,12 @@ class Nav extends Component {
                     <div className='profile'>
                         <h4> Welcome, {this.props.user.username}</h4>
                     </div>
-                    
+                    <div className='btn'>
                     <button><Link className='navBtn' to='/feed'>Home</Link></button>
                     <button><Link className='navBtn' to='/new'>New Post</Link></button>
                     <button><Link className='navBtn' to='/myPosts' >My Posts</Link>  </button>
                 <button><Link className='navBtn' to='/'>Logout</Link></button>
+                </div>
                 </div>
                 <br className='br'></br>
             </header>

@@ -34,18 +34,27 @@
 }
 .navBtn {
     color: black;
-    background-color: transparent;
+    background-color: transparent; 
     border: none;
-    
-   width: fit-content;
-   height: fit-content;
-    
+   background-color: rgb(151, 150, 150);
+    padding: 15px 25px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    border-color: rgb(151, 150, 150);
 }
 .br {
     width: 10px;
     background-color: black;
+}
+
+.btn {
+    width: 70%;
+    display: flex;
+    justify-content: space-around;
+    background-color: transparent;
+    color: black;
+    border-color: rgb(151, 150, 150);
+
 }
